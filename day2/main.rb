@@ -2,6 +2,7 @@ file = File.open('input.txt')
 
 depth = 0
 horizontal = 0
+aim = 0
 
 file.each_line do |line|
   command, value = line.split(' ')
@@ -11,11 +12,18 @@ file.each_line do |line|
   case command
   when 'up'
     depth -= value
+    aim -= value
   when 'down'
     depth += value
+    aim += value
   when 'forward'
     horizontal += value
+    depth += aim * value
   end
+
+  p depth
+  p aim
+  p horizontal
 end
 
 puts horizontal * depth
